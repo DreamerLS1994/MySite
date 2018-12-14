@@ -35,17 +35,21 @@
         <button type="submit" class="btn btn-default">确定</button>
       </form>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">链接</a></li>
+{% if user.is_authenticated %}
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">下拉<span class="caret"></span></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{user.username}}<span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><a href="#">下拉1</a></li>
             <li><a href="#">下拉2</a></li>
             <li><a href="#">下拉3</a></li>
             <li role="separator" class="divider"></li>
-            <li><a href="#">下拉4</a></li>
+            <li><a href="{% url 'account_logout' %}">退出</a></li>
           </ul>
         </li>
+{% else %}
+        <li><a href="{% url 'account_login' %}">登陆</a></li>
+        <li><a href="{% url 'account_signup' %}">注册</a></li>
+{% endif %}
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->

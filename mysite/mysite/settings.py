@@ -41,9 +41,41 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    # for allauth
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+
     # for blog
     'blog',
+    
 ]
+
+SITE_ID = 1
+
+# allauth 配置
+
+#作用是登陆时可以用用户名也可以用邮箱
+ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
+#作用时注册时，邮箱是必备的。
+ACCOUNT_EMAIL_REQUIRED = True
+#指定登陆成功后的跳转路径 默认是 /accounts/profile/
+LOGIN_REDIRECT_URL = "/"
+#禁用注册邮箱验证
+ACCOUNT_EMAIL_VERIFICATION='none'
+#登出直接退出，不用确认
+ACCOUNT_LOGOUT_ON_GET=True
+
+
+EMAIL_HOST = 'smtp.163.com'            #配置smtp地址
+EMAIL_HOST_USER = 'example@163.com'              #配置邮箱地址 
+EMAIL_HOST_PASSWORD = 'xxxxxxxxxxxx'                  #配置授权码，注意是授权码，不是邮箱密码
+EMAIL_PORT = 465                                         #端口号
+EMAIL_USE_SSL = True                                #指定SSL发送
+EMAIL_FROM = "example"                            #可以指定邮件发件人
+DEFAULT_FROM_EMAIL = 'example<example@163.com>'  
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -60,7 +92,7 @@ ROOT_URLCONF = 'mysite.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS':  [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -109,9 +141,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/2.1/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'zh-hans'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Shanghai'
 
 USE_I18N = True
 
