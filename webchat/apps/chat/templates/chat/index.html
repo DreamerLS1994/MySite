@@ -1,0 +1,24 @@
+
+{% load static %}
+
+<html>
+<body>
+
+
+
+<form method="post" action="{% url 'chat:login_url' %}">
+  {% csrf_token %}
+
+  <input type="text" name="user" placeholder="user" required></input>
+
+  <input type="password" name="pass" placeholder="pass" required></input>
+
+  <button type="submit">submit</button>
+</form>
+
+
+</body>
+
+
+
+</html>
