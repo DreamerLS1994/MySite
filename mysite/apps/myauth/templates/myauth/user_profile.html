@@ -1,0 +1,40 @@
+{% extends "blog/base.html" %}
+
+{% load static %}
+
+
+
+{% block base_content %}
+
+<style>
+.col-center-block {
+        float: none;
+        display: block;
+        margin: 0 auto;
+        /* margin-left: auto; margin-right: auto; */
+}
+</style>
+
+<div class="container">
+    <div class="row">
+         <div class="col-xs-6 col-md-4 col-center-block">
+             <ul class="list-group">
+                 <li class="list-group-item" style="border:0px">
+                     <h4><span>用户名：</span><span>{{user.username}}</span> </h4>
+                 </li>
+                 <li class="list-group-item" style="border:0px">
+                     <h4><span>邮&emsp;箱：</span><span>{{user.email}}</span> </h4>
+                 </li>
+                 <li class="list-group-item" style="border:0px">
+                     <h4><span>签&emsp;名：</span>{{user.signature}}</h4>
+                 </li>
+                 <a class="pull-right btn btn-primary" style="margin-right: 20px" href="{% url 'myauth:update_profile_url' %}">修改资料</a>
+                 <a class="pull-right btn btn-primary" style="margin-right: 20px" href="{% url 'account_change_password' %}">修改密码</a>
+	     </ul>
+         </div>
+    </div>
+</div>
+
+
+
+{% endblock %}

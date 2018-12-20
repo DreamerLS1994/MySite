@@ -53,8 +53,14 @@ INSTALLED_APPS = [
 
     # for blog
     'blog',
+
+    # for myauth
+    'myauth',
     
 ]
+
+# 重载auth_model
+AUTH_USER_MODEL = 'myauth.Myuser'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
 

@@ -1,0 +1,34 @@
+{% extends "blog/base.html" %}
+
+{% load static %}
+
+
+
+{% block base_content %}
+
+<style>
+.col-center-block {
+        float: none;
+        display: block;
+        margin: 0 auto;
+        /* margin-left: auto; margin-right: auto; */
+}
+</style>
+
+<div class="container">
+    <div class="row">
+         <div class="col-xs-6 col-md-4 col-center-block">
+ 	     <form class="update_profile", method="post" enctype="multipart/form-data" action="{% url 'myauth:update_profile_url' %}">
+               {% csrf_token %}
+               {{ form.as_p }}
+               <button class="pull-right btn btn-primary" type="submit">确认更新</button>
+             </form>
+
+         </div>
+
+    </div>
+</div>
+
+
+
+{% endblock %}
