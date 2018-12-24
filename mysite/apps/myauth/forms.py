@@ -5,5 +5,5 @@ from .models import Myuser
 class ProfileForm(forms.ModelForm):
     class Meta:
         model = Myuser
-        fields = ['signature'] #只显示model中指定的字段
+        fields = ['avatar','signature'] #只显示model中指定的字段
 
