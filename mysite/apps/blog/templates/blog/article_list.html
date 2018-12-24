@@ -1,0 +1,10 @@
+
+<div class="list-group">
+  <a class="list-group-item disabled">文章标题</a>
+{% for article in article_list %}
+  <a href="{% url 'blog:article_url' article.slug %}" class="list-group-item">{{article.title}}</a>
+{% empty %}
+<h3>暂时没有文章!</h3>
+{% endfor %}
+</div>
+

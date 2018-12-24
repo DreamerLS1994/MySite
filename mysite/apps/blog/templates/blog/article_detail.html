@@ -1,0 +1,18 @@
+{% extends "blog/base.html" %}
+
+{% block base_content %}
+
+
+<div class="container">
+    <div class="row">
+	<div class="text-center">
+
+	  <h3>{{article.title}}</h3>
+	  <p>{{article.author}}</p>
+	  <p>{{article.body}}</p>
+	  <p>{{article.create_date}}</p>
+    	</div>
+    </div>
+</div>
+
+{% endblock %}

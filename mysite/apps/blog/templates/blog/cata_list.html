@@ -1,0 +1,11 @@
+
+<div class="list-group">
+  <a class="list-group-item disabled">文章分类</a>
+{% for cata in cata_list %}
+  <a href="{% url 'blog:cata_url' cata.slug %}" class="list-group-item">{{cata.name}}</a>
+
+{% empty %}
+<h3>暂时没有分类!</h3>
+{% endfor %}
+</div>
+
