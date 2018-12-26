@@ -1,6 +1,8 @@
 from django.db import models
 from django.conf import settings
 
+from ckeditor_uploader.fields import RichTextUploadingField
+
 # Create your models here.
 
 # 文章分类model
@@ -23,7 +25,8 @@ class Article(models.Model):
         author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, verbose_name='作者')
         title = models.CharField(max_length=150, verbose_name='标题')
         summary = models.TextField('摘要', max_length=300, default='请输入文章摘要....')
-        body = models.TextField(verbose_name='内容', default='请输入文章内容....')
+        # body = models.TextField(verbose_name='内容', default='请输入文章内容....')
+        body = RichTextUploadingField(verbose_name='内容', default='请输入文章内容....')
         create_date = models.DateTimeField(verbose_name='创建时间', auto_now_add=True)
 	
 	#slug 。这个其实就是用在文章的URL的。
