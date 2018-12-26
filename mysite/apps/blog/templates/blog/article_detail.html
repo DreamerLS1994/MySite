@@ -1,6 +1,14 @@
 {% extends "blog/base.html" %}
 
 {% block base_content %}
+<style>
+.col-center-block {
+        float: none;
+        display: block;
+        margin: 0 auto;
+        /* margin-left: auto; margin-right: auto; */
+}
+</style>
 
 
 <div class="container">
@@ -12,6 +20,11 @@
 	  <p>{{article.body|safe}}</p>
 	  <p>{{article.create_date}}</p>
     	</div>
+
+  	<div class="col-xs-12 col-md-8 col-center-block">
+          {% include 'comment/comment_list.html'%}
+	</div>
+
     </div>
 </div>
 

@@ -40,7 +40,9 @@
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{user.username}}<span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><a href="{% url 'myauth:profile_url' %}">个人中心</a></li>
-            <li><a href="#">下拉2</a></li>
+{% if user.is_staff %}
+            <li><a href="{% url 'admin:index' %}">后台管理</a></li>
+{% endif %}
             <li><a href="#">下拉3</a></li>
             <li role="separator" class="divider"></li>
             <li><a href="{% url 'account_logout' %}">退出</a></li>

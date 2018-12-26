@@ -1,0 +1,74 @@
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+
+<script type="text/javascript">
+$(function() {
+
+    $("#cmt_submit").click(function(){
+        var body = $("#cmt_content").val();
+        if (body.length == 0){
+            alert("请输入评论内容....");
+            return;
+        }
+        
+        //从html获取相关字段
+        var article_id = $(this).data('article_id');
+        var csrf = $(this).data('csrf');                 // html 里面写的data-*, 这里就写 *
+        var ajax_url = $(this).data('ajax_url')
+
+        //设置post Json字段 
+        var post_data={
+        "article_id":article_id,
+        "body":body,
+        };
+
+        $.ajaxSetup({
+            data:{'csrfmiddlewaretoken': csrf }
+        });
+
+        $.ajax({
+            url:ajax_url,
+            type:'post',
+            data:post_data,
+            
+            //{#请求成功回调函数#}
+            success:function (data) {
+                alert(data.msg);
+                window.location.reload(); //刷新当前页面.
+            },
+            //{#请求失败回调函数#}
+            error:function (data) {
+                alert("err"+ data.msg);
+            }
+        });
+        
+    });
+
+})
+</script>
+
+<div>
+  <br><br>
+{% if user.is_authenticated %}
+  <textarea rows="5" cols="100" id="cmt_content"></textarea>
+  <br>
+  <button type="button" class="pull-right btn btn-primary"id="cmt_submit" data-csrf="{{ csrf_token }}" data-article_id="{{article.id}}" data-ajax_url="{% url 'comment:cmt_add_url' %}">评论</button>
+{% else %}
+  <div class="text-center">尚未登录，暂时无法评论。请先
+      <a class="text-danger" href="{% url 'account_login' %}?next={{ request.path }}">登录</a> 或
+      <a class="text-danger" href="{% url 'account_signup' %}?next={{ request.path }}">注册</a> 
+  </div>
+{% endif %}
+   <br><br><br>
+</div>
+
+
+<div class="list-group">
+  <a class="list-group-item disabled">评论</a>
+{% for cmt in cmt_list %}
+  <a class="list-group-item"><p><i>({{forloop.counter}}#)&nbsp;&nbsp;&nbsp;</i>{{cmt.owner}}:{{cmt.body}}</p><p class="text-right">{{cmt.create_date}}</p></a>
+{% empty %}
+<h4>暂时没有评论!</h4>
+{% endfor %}
+</div>
+

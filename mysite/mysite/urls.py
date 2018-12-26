@@ -25,6 +25,7 @@ urlpatterns = [
     path('accounts/', include('myauth.urls', namespace = 'myauth')),
     path('', include('blog.urls', namespace = 'blog')),
     path('ckeditor/', include('ckeditor_uploader.urls')),
+    path('comment/', include('comment.urls', namespace = 'comment')),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)  # 加入这个才能显示media文件
 

@@ -61,11 +61,17 @@ INSTALLED_APPS = [
     'imagekit',
     # for ckeditor
     'ckeditor',
-    'ckeditor_uploader' 
+    'ckeditor_uploader',
+    
+    # for comment
+    'comment',
+
 ]
 
 # 重载auth_model
 AUTH_USER_MODEL = 'myauth.Myuser'
+
+ARTICLE_MODEL = 'blog.Article'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
 

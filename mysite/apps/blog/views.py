@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from blog.models import Article, Catalogue
+from comment.models import Comment
+
 from django.shortcuts import get_object_or_404
 
 
@@ -16,7 +18,8 @@ def index_view(request):
 
 def article_view(request, slug):
     article = get_object_or_404(Article, slug=slug)  #获取该slug的文章
-    return render(request,'blog/article_detail.html', {'article':article})   # 返回article_detail.html页面
+    cmt_list = Comment.objects.filter(belong = article)  #获取该文章的所有评论
+    return render(request,'blog/article_detail.html', {'article':article, 'cmt_list':cmt_list})   # 返回article_detail.html页面
 
 def catalogue_view(request, slug):
     this_cata = get_object_or_404(Catalogue, slug=slug) #找到该目录
