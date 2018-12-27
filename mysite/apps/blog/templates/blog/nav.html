@@ -15,18 +15,6 @@
       <ul class="nav navbar-nav">
         <li class="active"><a href="#">链接1 <span class="sr-only">(current)</span></a></li>
         <li><a href="#">链接2</a></li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">下拉<span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="#">下拉1</a></li>
-            <li><a href="#">下拉2</a></li>
-            <li><a href="#">下拉3</a></li>
-            <li role="separator" class="divider"></li>
-            <li><a href="#">下拉4</a></li>
-            <li role="separator" class="divider"></li>
-            <li><a href="#">下拉5</a></li>
-          </ul>
-        </li>
       </ul>
       <form class="navbar-form navbar-left">
         <div class="form-group">
@@ -43,7 +31,8 @@
 {% if user.is_staff %}
             <li><a href="{% url 'admin:index' %}">后台管理</a></li>
 {% endif %}
-            <li><a href="#">下拉3</a></li>
+            <li><a href="{% url 'comment:msg_all_url' %}">消息通知</a></li>
+
             <li role="separator" class="divider"></li>
             <li><a href="{% url 'account_logout' %}">退出</a></li>
           </ul>

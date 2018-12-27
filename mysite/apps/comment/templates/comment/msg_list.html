@@ -1,0 +1,35 @@
+{% extends "blog/base.html" %}
+
+{% block base_content %}
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8 col-xs-12 col-sm-6 col-md-8">
+	   <div class="list-group">
+       	     <a class="list-group-item disabled">消息通知</a>
+	     {% for msg in msg_list %}
+  	     <span class="list-group-item">{{msg.sender}} 在《<a href="{% url 'blog:article_url' msg.belong.belong.slug %}">{{msg.belong.belong.title}}</a>》中提到了你
+             </span>
+	     {% empty %}
+	     <h3>暂无消息!</h3>
+             {% endfor %}
+           </div>
+        </div>
+
+        <!-- Right -->
+        <div class=" col-lg-4 col-xs-12 col-sm-6">
+	  <div class="list-group">
+	     <a class="list-group-item disabled">消息通知</a>
+	     <a href="{% url 'comment:msg_all_url' %}" class="list-group-item">全部消息</a>
+	     <a href="{% url 'comment:msg_unread_url' %}" class="list-group-item">未读消息</a>
+	  </div>
+
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
+
+
