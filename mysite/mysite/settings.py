@@ -50,24 +50,34 @@ INSTALLED_APPS = [
     
     # for crispy
     'crispy_forms',
-
     # for blog
     'blog',
-
     # for myauth
     'myauth',
-
     # for image
     'imagekit',
     # for ckeditor
     'ckeditor',
     'ckeditor_uploader',
-    
     # for comment
     'comment',
-
+    # for haytack
+    'haystack',
 ]
 
+HAYSTACK_CONNECTIONS = {
+    'default':{
+        # 'ENGINE':'haystack.backends.whoosh_backend.WhooshEngine',
+        'ENGINE':'blog.whoosh_cn_backend.WhooshEngine',
+        'PATH': os.path.join(BASE_DIR, 'whoosh_index'),
+
+    },
+
+}
+
+# 实时自动更新索引配置
+HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
+    
 # 重载auth_model
 AUTH_USER_MODEL = 'myauth.Myuser'
 
