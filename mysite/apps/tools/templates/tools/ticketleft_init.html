@@ -1,0 +1,111 @@
+{% extends "blog/base.html" %}
+
+{% load static %}
+
+{% block base_content %}
+
+<style>
+.col-center-block {
+        float: none;
+        display: block;
+        margin: 0 auto;
+        /* margin-left: auto; margin-right: auto; */
+}
+</style>
+
+<script type="text/javascript">
+$(function() {
+    $("#submit").click(function(){
+        var from_sta = $("#from_sta").val();
+        var to_sta = $("#to_sta").val();
+        var train_date = $("#train_date").val();
+        var ticket_type = $('input:radio:checked').val();
+        
+	//从html获取相关字段 html 里面写的data-*, 这里就写 *
+        var csrf = $(this).data('csrf');                 
+        var ajax_url = $(this).data('ajax_url')
+
+        //设置post Json字段 
+        var post_data={
+            "from_sta":from_sta,
+            "to_sta":to_sta,
+	    "train_date":train_date,
+	    "ticket_type":ticket_type,
+        };
+	
+        $("#mytable  tr:not(:first)").html("");
+ 
+        $.ajaxSetup({
+            data:{'csrfmiddlewaretoken': csrf }
+        });
+
+        $.ajax({
+            url:ajax_url,
+            type:'post',
+            data:post_data,
+            //{#请求成功回调函数#}
+            success:function (data) {
+                //alert(data.msg+data.res);
+		list = data.res;
+	        console.log(data.url);     
+   		for(var i=0; i < list.length; i++)
+		{
+		    trtd="<tr>"
+		    for(var j=0; j < list[i].length; j++)
+		    {
+			trtd += "<th>" + list[i][j] + "</th>"
+		    }
+		    trtd += "</tr>"
+	   	    $("#mytable").find('tbody').append(trtd);
+		
+		}   
+            },
+            //{#请求失败回调函数#}
+            error:function (data) {
+                alert("err "+ data.url);
+            }
+        });
+    });
+})
+</script>
+
+
+
+<div class="container">
+    <div class="row">
+         <div class="col-lg-8 col-center-block">
+            <h4>输入相关信息进行余票查询(截止到 2019-01-03 测试成功)</h4>
+	    <h6>站点URL：'https://kyfw.12306.cn/otn/resources/js/framework/station_name.js?station_version=1.9088'</h6>
+ 	    <h6>请求URL：'https://kyfw.12306.cn/otn/leftTicket/queryZ?leftTicketDTO.train_date=' + date + '&leftTicketDTO.from_station=' + from_sta_code + '&leftTicketDTO.to_station=' + to_sta_code + '&purpose_codes=' + ticket_type</h6>
+            <input type="text" class="form-control" id="from_sta" placeholder="出发站" required=True><br>
+            <input type="text" class="form-control" id="to_sta" placeholder="到达站" required=True><br>
+            
+            <input type="date" class="form-control" id="train_date" placeholder="发车日期" required=True><br>
+	    <input type="radio" checked="checked" name="ticket_type" value="ADULT" />成人票
+	    <input type="radio" name="ticket_type" value="0X00" />学生票
+	    <button class="btn btn-primary pull-right" type="submit" id="submit" data-csrf="{{ csrf_token }}" data-ajax_url="{% url 'tools:ticketleft_query_url' %}">查询</button>
+    	    <br><br>
+	    <table class="table table-striped" style="display:block" id="mytable">
+	      <tr>
+		<th>车次</th>
+		<th>出发站</th>
+		<th>到达站</th>
+		<th>出发时间</th>
+		<th>到达时间</th>
+		<th>历时</th>
+		<th>特等座</th>
+		<th>一等座</th>
+		<th>二等座</th>
+		<th>软卧</th>
+		<th>硬卧</th>
+		<th>软座</th>
+		<th>硬座</th>
+		<th>无座</th>
+  	      </tr>
+
+	    </table>    
+	 </div>
+    </div>
+</div>
+
+{% endblock %}

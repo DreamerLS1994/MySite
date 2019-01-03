@@ -63,6 +63,8 @@ INSTALLED_APPS = [
     'comment',
     # for haytack
     'haystack',
+    # for tools
+    'tools',
 ]
 
 HAYSTACK_CONNECTIONS = {

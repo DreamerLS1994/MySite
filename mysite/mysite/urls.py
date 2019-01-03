@@ -26,6 +26,7 @@ urlpatterns = [
     path('', include('blog.urls', namespace = 'blog')),
     path('ckeditor/', include('ckeditor_uploader.urls')),
     path('comment/', include('comment.urls', namespace = 'comment')),
+    path('tools/', include('tools.urls', namespace = 'tools')),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)  # 加入这个才能显示media文件
 
