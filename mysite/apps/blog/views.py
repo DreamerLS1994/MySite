@@ -3,6 +3,8 @@ from django.http import HttpResponse
 from blog.models import Article, Catalogue
 from comment.models import Comment
 
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage, InvalidPage
+
 from django.shortcuts import get_object_or_404
 
 
@@ -10,8 +12,18 @@ from django.shortcuts import get_object_or_404
 
 def index_view(request):
     #return HttpResponse("Hello World! From Jerry Coding")
-    articles = Article.objects.all()  # 获取所有文章数据
+    article_list = Article.objects.all()  # 获取所有文章数据
     catalogues = Catalogue.objects.all() # 获取所有分类数据
+    paginator = Paginator(article_list, 2)
+    page = request.GET.get('page')
+    try:
+        articles = paginator.page(page)
+    except PageNotAnInteger:
+        articles = paginator.page(1)
+    except InvalidPage:
+        return HttpResponse('404NOT FOUND')
+    except EmptyPage:
+        articles = paginator.page(paginator.num_pages)
 
     return render(request, 'blog/index.html', {'article_list':articles, 'cata_list':catalogues}) #返回给index用于显示
     # return render(request, 'blog/index.html')
@@ -23,8 +35,19 @@ def article_view(request, slug):
 
 def catalogue_view(request, slug):
     this_cata = get_object_or_404(Catalogue, slug=slug) #找到该目录
-    articles = Article.objects.filter(catalogue = this_cata) # 找到属于该目录的所有文章
+    article_list = Article.objects.filter(catalogue = this_cata) # 找到属于该目录的所有文章
     catalogues = Catalogue.objects.all() # 获取所有分类数据
+    
+    paginator = Paginator(article_list, 2,1)
+    page = request.GET.get('page')
+    try:
+        articles = paginator.page(page)
+    except PageNotAnInteger:
+        articles = paginator.page(1)
+    except InvalidPage:
+        return HttpResponse('404NOT FOUND')
+    except EmptyPage:
+        articles = paginator.page(paginator.num_pages)
 
     return render(request, 'blog/cata_detail.html', {'article_list':articles, 'cata_list':catalogues})
  

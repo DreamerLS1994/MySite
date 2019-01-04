@@ -1,15 +1,16 @@
 
-
+<script src="https://cdn.ckeditor.com/ckeditor5/11.2.0/classic/ckeditor.js"></script>
+<script src="https://cdn.ckeditor.com/ckeditor5/11.2.0/classic/translations/zh.js"></script>
 <script type="text/javascript">
 $(function() {
 
     $("#cmt_submit").click(function(){
-        var body = $("#cmt_content").val();
+        var body = editor.getData();
         if (body.length == 0){
             alert("请输入评论内容....");
             return;
         }
-        
+        console.log(body) 
         //从html获取相关字段
         var article_id = $(this).data('article_id');
         var csrf = $(this).data('csrf');                 // html 里面写的data-*, 这里就写 *
@@ -49,7 +50,22 @@ $(function() {
 <div>
   <br><br>
 {% if user.is_authenticated %}
-  <textarea rows="5" cols="100" id="cmt_content"></textarea>
+  <textarea name="content" id="editor">This is some sample content.</textarea>
+  <script type="text/javascript">
+  var editor;
+  ClassicEditor
+    .create( document.querySelector( '#editor' ), {
+	toolbar: [ 'bold', 'italic', 'link', 'NumberedList', 'BulletedList', 'Blockquote', 'Undo','Redo'],
+        language: 'zh'  
+    } )
+    .then( newEditor => {
+        editor = newEditor;
+    } )
+    .catch( error => {
+        console.error( error );
+    } );
+  </script>
+
   <br>
   <button type="button" class="pull-right btn btn-primary"id="cmt_submit" data-csrf="{{ csrf_token }}" data-article_id="{{article.id}}" data-ajax_url="{% url 'comment:cmt_add_url' %}">评论</button>
 {% else %}
@@ -65,7 +81,7 @@ $(function() {
 <div class="list-group">
   <a class="list-group-item disabled">评论</a>
 {% for cmt in cmt_list %}
-  <a class="list-group-item"><p><i>({{forloop.counter}}#)&nbsp;&nbsp;&nbsp;</i>{{cmt.owner}}:{{cmt.body}}</p><p class="text-right">{{cmt.create_date}}</p></a>
+  <a class="list-group-item"><p><i>({{forloop.counter}}#)&nbsp;&nbsp;&nbsp;</i>{{cmt.owner}}:{{cmt.body|safe}}</p><p class="text-right">{{cmt.create_date}}</p></a>
 {% empty %}
 <h4>暂时没有评论!</h4>
 {% endfor %}

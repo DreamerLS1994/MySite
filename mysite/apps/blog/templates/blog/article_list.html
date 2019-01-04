@@ -8,3 +8,16 @@
 {% endfor %}
 </div>
 
+<div id="pages" class="text-center" >
+<nav aria-label="...">
+  <ul class="pager">
+{% if article_list.has_previous %}
+    <li class="active"><a href="?page={{ article_list.previous_page_number }}">Previous</a></li>
+{% endif %}
+    <li ><span>{{article_list.number}}/{{article_list.paginator.num_pages}}</span></li>
+{% if article_list.has_next %}
+    <li class="active"><a href="?page={{ article_list.next_page_number }}">Next</a></li>
+{% endif %}
+  </ul>
+</nav>
+</div>
