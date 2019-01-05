@@ -1,11 +1,27 @@
 from django.shortcuts import render
 from django.views.decorators.http import require_POST
 from django.http import JsonResponse
+from django.contrib.auth.decorators import login_required
 
 import requests
 import re
+import itchat
 
 # Create your views here.
+
+def wechat_view(request):
+    return render(request,'tools/wechat_init.html')
+    
+
+#def wechat_login_view(request):
+#    login(picDir = BASE_DIR)
+
+
+
+
+
+
+
 
 def ticketleft_init_view(request):
     return render(request,'tools/ticketleft_init.html')

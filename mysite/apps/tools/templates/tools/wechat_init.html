@@ -1,0 +1,20 @@
+
+{% extends "blog/base.html" %}
+
+{% load static %}
+
+{% block base_content %}
+
+
+{% if user.is_authenticated %}
+
+
+{% else %}
+  <h4 class="text-center">尚未登录此站点，暂时无法使用本功能。请先
+      <a class="text-danger" href="{% url 'account_login' %}?next={{ request.path }}">登录</a> 或
+      <a class="text-danger" href="{% url 'account_signup' %}?next={{ request.path }}">注册</a>
+  </h4>
+{% endif %}
+
+
+{% endblock %}
