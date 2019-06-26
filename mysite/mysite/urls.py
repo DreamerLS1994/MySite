@@ -18,9 +18,12 @@ from django.urls import path
 from django.conf.urls import include
 from django.conf.urls.static import static
 from django.conf import settings
+import xadmin
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    # 集成xadmin
+    path('xadmin/', xadmin.site.urls),
     path('accounts/', include('allauth.urls')),
     path('accounts/', include('myauth.urls', namespace = 'myauth')),
     path('', include('blog.urls', namespace = 'blog')),

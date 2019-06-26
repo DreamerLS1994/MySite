@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     
     # for crispy
     'crispy_forms',
+    'xadmin',
     # for blog
     'blog',
     # for myauth
@@ -65,6 +66,7 @@ INSTALLED_APPS = [
     'haystack',
     # for tools
     'tools',
+
 ]
 
 HAYSTACK_CONNECTIONS = {
