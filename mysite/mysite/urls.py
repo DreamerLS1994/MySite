@@ -30,6 +30,8 @@ urlpatterns = [
     path('ckeditor/', include('ckeditor_uploader.urls')),
     path('comment/', include('comment.urls', namespace = 'comment')),
     path('tools/', include('tools.urls', namespace = 'tools')),
+    path('api/', include('apis.urls', namespace = 'apis')),
+    path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)  # 加入这个才能显示media文件
 
