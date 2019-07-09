@@ -30,7 +30,7 @@
           <ul class="dropdown-menu">
             <li><a href="{% url 'myauth:profile_url' %}">个人中心</a></li>
 {% if user.is_staff %}
-            <li><a href="{% url 'admin:index' %}">后台管理</a></li>
+    <li><a href="{% url 'xadmin:index' %}">后台管理</a></li>
 {% endif %}
             <li><a href="{% url 'comment:msg_all_url' %}">消息通知</a></li>
 

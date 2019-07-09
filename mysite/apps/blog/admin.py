@@ -1,5 +1,5 @@
 from django.contrib import admin
-from blog.models import Article, Catalogue
+from blog.models import Article, Catalogue, TestModel
 
 import xadmin
 from xadmin import views
@@ -32,12 +32,18 @@ class ArticleAdmin(object):
     }
 
 
+class TestModelAdmin(object):
+    # 菜单图标
+    model_icon = 'fa fa-cog'
+
+
 # 标题栏
 xadmin.site.register(views.CommAdminView, GlobalSetting)
 # 注册主题设置
 xadmin.site.register(views.BaseAdminView, BaseSetting)
 
 xadmin.site.register(Article, ArticleAdmin)
+xadmin.site.register(TestModel, TestModelAdmin)
 
 '''
 @admin.register(Article)

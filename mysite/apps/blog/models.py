@@ -43,3 +43,41 @@ class Article(models.Model):
         def __str__(self):
                 return self.title[:20]
 
+
+# 测试 Model字段
+class TestModel(models.Model):
+        test2 = models.DateField(verbose_name='日期')
+        test3 = models.DateTimeField(verbose_name='时间日期')
+        # decimal_places 小数点位数 精度  max_digits 最大位数
+        test4 = models.DecimalField(verbose_name='十进制小数', max_digits=10, decimal_places=5)
+        test5 = models.FloatField(verbose_name='浮点数')
+        test6 = models.IntegerField(verbose_name='整形')
+        test7 = models.BigIntegerField(verbose_name='长整形')
+        test8 = models.SmallIntegerField(verbose_name='Small INT')
+        test9 = models.PositiveIntegerField(verbose_name='正数INT')
+        test10 = models.PositiveSmallIntegerField(verbose_name='正数Small INT')
+        '''
+        范围取值：
+　　　　'SmallIntegerField': (-32768, 32767),
+　　　　'IntegerField': (-2147483648, 2147483647),
+　　　　'BigIntegerField': (-9223372036854775808, 9223372036854775807),
+　　　　'PositiveSmallIntegerField': (0, 32767),
+　　　　'PositiveIntegerField': (0, 2147483647),
+        '''
+
+        test12 = models.GenericIPAddressField(verbose_name='IP地址')
+        test13 = models.SlugField(verbose_name='Slug')
+
+        test14 = models.TextField(verbose_name='文本框')
+        test15 = models.TimeField(verbose_name='时间')
+        test16 = models.URLField(verbose_name='URL地址')
+        test17 = models.BinaryField(verbose_name='二进制')
+        test18 = models.ImageField(verbose_name='图片')
+        test19 = models.FileField(verbose_name='文件')
+
+        class Meta:
+                verbose_name = '测试Model'  # 通俗易懂的名字
+                verbose_name_plural = verbose_name  # 复数形式
+
+        def __str__(self):
+                return "测试Model"
