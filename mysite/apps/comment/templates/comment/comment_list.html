@@ -69,10 +69,13 @@ $(function() {
   <br>
   <button type="button" class="pull-right btn btn-primary"id="cmt_submit" data-csrf="{{ csrf_token }}" data-article_id="{{article.id}}" data-ajax_url="{% url 'comment:cmt_add_url' %}">评论</button>
 {% else %}
-  <div class="text-center">尚未登录，暂时无法评论。请先
+    <div class="panel panel-info">
+        <div class="panel-body text-center">
+            尚未登录，暂时无法评论。请先
       <a class="text-danger" href="{% url 'account_login' %}?next={{ request.path }}">登录</a> 或
-      <a class="text-danger" href="{% url 'account_signup' %}?next={{ request.path }}">注册</a> 
-  </div>
+            <a class="text-danger" href="{% url 'account_signup' %}?next={{ request.path }}">注册</a>
+        </div>
+    </div>
 {% endif %}
    <br><br><br>
 </div>

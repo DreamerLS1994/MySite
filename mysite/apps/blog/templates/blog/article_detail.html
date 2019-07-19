@@ -11,21 +11,18 @@
 </style>
 
 
-<div class="container">
-    <div class="row">
-	<div class="text-center">
-
-	  <h3>{{article.title}}</h3>
-	  <p>{{article.author}}</p>
-	  <p>{{article.body|safe}}</p>
-	  <p>{{article.create_date}}</p>
-    	</div>
-
-  	<div class="col-xs-12 col-md-8 col-center-block">
-          {% include 'comment/comment_list.html'%}
-	</div>
-
+    <div class="col-xs-12 col-md-8 col-center-block">
+        <div class="panel panel-info">
+            <div class="panel-heading text-center">
+                <h1 class="panel-title"><b>{{ article.title }}</b></h1>
+            </div>
+            <div class="panel-body text-center">
+                <i><b>{{ article.author }}</b> 写于 <b>{{ article.create_date }}</b></i>
+                <p>{{ article.body|safe }}</p>
+                <br>
+            </div>
     </div>
+        {% include 'comment/comment_list.html' %}
 </div>
 
 {% endblock %}
