@@ -18,6 +18,7 @@ from django.urls import path
 from django.conf.urls import include
 from django.conf.urls.static import static
 from django.conf import settings
+from blog.views import page_not_found
 import xadmin
 
 urlpatterns = [
@@ -35,3 +36,5 @@ urlpatterns = [
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)  # 加入这个才能显示media文件
 
+# 全局404
+handler404 = page_not_found

@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, render_to_response
 from django.http import HttpResponse
 from blog.models import Article, Catalogue
 from comment.models import Comment
@@ -9,6 +9,21 @@ from django.shortcuts import get_object_or_404
 
 
 # Create your views here.
+
+
+def page_not_found(request, exception):
+    # 刚刚创建的404.html  路径要写对
+    response = render_to_response("blog/404.html", {})
+    response.status_code = 404
+    return response
+
+'''
+下面是处理服务器错误 500 的函数，少一个request 参数
+def page_error(exception):
+    response = render_to_response("blog/500.html", {})
+    response.status_code = 500
+    return response
+'''
 
 def index_view(request):
     #return HttpResponse("Hello World! From Jerry Coding")
