@@ -19,6 +19,7 @@ from django.conf.urls import include
 from django.conf.urls.static import static
 from django.conf import settings
 from blog.views import page_not_found
+from rest_framework_jwt.views import obtain_jwt_token
 import xadmin
 
 urlpatterns = [
@@ -32,6 +33,7 @@ urlpatterns = [
     path('comment/', include('comment.urls', namespace = 'comment')),
     path('tools/', include('tools.urls', namespace = 'tools')),
     path('api/', include('apis.urls', namespace = 'apis')),
+    path('api-auth/', obtain_jwt_token),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)  # 加入这个才能显示media文件

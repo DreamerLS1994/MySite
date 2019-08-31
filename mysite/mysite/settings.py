@@ -69,9 +69,15 @@ INSTALLED_APPS = [
     # for apis
     'apis',
     'rest_framework',
+    # for jwt api-auth
+    'rest_framework.authtoken',  # 设置token
+    'corsheaders',
 ]
 
 REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+    ),
     # Use Django's standard `django.contrib.auth` permissions,
     # or allow read-only access for unauthenticated users.
     'DEFAULT_PERMISSION_CLASSES': [
@@ -83,7 +89,7 @@ REST_FRAMEWORK = {
 HAYSTACK_CONNECTIONS = {
     'default':{
         # 'ENGINE':'haystack.backends.whoosh_backend.WhooshEngine',
-        'ENGINE':'blog.whoosh_cn_backend.WhooshEngine',
+        'ENGINE': 'blog.whoosh_cn_backend.WhooshEngine',
         'PATH': os.path.join(BASE_DIR, 'whoosh_index'),
 
     },
@@ -126,6 +132,7 @@ DEFAULT_FROM_EMAIL = 'example<example@163.com>'
 
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',   # 跨域
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',

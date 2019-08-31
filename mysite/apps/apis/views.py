@@ -3,7 +3,8 @@ from rest_framework import permissions, status
 from rest_framework.response import Response
 from .serializers import RubbishSerializer, RubbishCategorySerializer
 from rest_framework.generics import RetrieveAPIView, ListAPIView
-
+from rest_framework_jwt.authentication import JSONWebTokenAuthentication
+from rest_framework.authentication import SessionAuthentication
 # Create your views here.
 
 # 所有分类获取处理 继承listAPIView
@@ -24,10 +25,15 @@ class RubbishCategoryDetailView(RetrieveAPIView):
         except Category.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
 
+
 # 所有垃圾获取处理 继承listAPIView
 class RubbishView(ListAPIView):
+    permission_classes = (permissions.IsAuthenticated, )
+    # 进行jwt验证
+    authentication_classes = (JSONWebTokenAuthentication, SessionAuthentication)
     queryset = Rubbish.objects.all()
     serializer_class = RubbishSerializer
+
 
 # 单个垃圾获取处理 继承RetrieveAPIView 表示只可以get
 class RubbishDetailView(RetrieveAPIView):
