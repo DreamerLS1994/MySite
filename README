@@ -8,6 +8,7 @@ jerry
 
 更新日志：
 
+2019-8-31:django 建站历程21 jwt验证api
 2019-8-12:django建站历程20，自定义网站404界面
 2019-7-5:xadmin2集成、restframework集成
 2019-1-4:添加了文章翻页，评论框改为ckeditor富文本框。
